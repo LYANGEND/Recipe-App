@@ -22,7 +22,7 @@ To get a local copy up and running follow these simple example steps.
 - Rails
 - Postgresql
 
-### Setup
+### Setups
 
 - Clone the Repository
 `git clone https://github.com/ciraganenicole/recipe-app.git`
