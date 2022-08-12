@@ -13,8 +13,95 @@
  *= require_tree .
  *= require_self
  */
+ body {
+  background-color: #1f2f3590;
+  color: #fff;
+}
 
-body {
-  padding: 1% 5%;
-  box-sizing: border-box;
+a {
+  color: #fff;
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background-color: #1f2f35 !important;
+}
+
+.single_recepie a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #1f2f35;
+  padding: 5px 20px;
+  border: 1.5px solid #1f2f35;
+  transition: 0.2s ease;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #1f2f35;
+  background-color: #fff;
+  padding: 5px 20px;
+  margin: 20px 30px;
+  border: 1.5px solid #fff;
+  transition: 0.2s ease;
+}
+
+.navbar a:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: #1f2f35;
+}
+
+.navbar button {
+  background-color: rgba(255, 255, 255, 0.459);
+  margin-top: 30px;
+  margin-left: 460px;
+  color: #fff;
+  padding: 5px 20px;
+  border: 1.5px solid #fff;
+}
+
+.single_recepie {
+  background-color: #fff;
+  padding: 30px;
+  color: black;
+  margin-bottom: 50px;
+}
+
+.single_recepie a:hover {
+  background-color: #1f2f35;
+}
+
+.recepie_details_area {
+  background-color: #fff;
+  color: black;
+  padding: 40px;
+  margin-bottom: 60px;
+}
+
+.recepie_details_area img {
+  width: 80%;
+}
+
+.from-check {
+  background-color: #1f2f35;
+}
+
+.recepies_info button {
+  background-color: #1f2f35;
+  color: #fff;
+  padding: 3px 7px;
+  border: #1f2f35;
+  cursor: pointer;
+}
+
+.line_btn {
+  color: #1f2f35;
+}
+
+.form-label {
+  color: #1f2f35;
 }
