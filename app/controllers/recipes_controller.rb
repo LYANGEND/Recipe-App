@@ -1,54 +1,46 @@
-class RecipesController < ApplicationController
-  before_action :authenticate_user!, except: :public_recipes
-
-  def public_recipes
-    @recipes = Recipe.includes(:user).where(public: true)
+class RecipesController < ActionController::Base
+  def index
+    @user = current_user
+    @recipes = @user.recipes.all
   end
 
   def show
-    @recipe = Recipe.includes(:foods).find(params[:id])
+    @recipe = Recipe.find(params[:id])
+    @recipe_foods = @recipe.recipeFoods.all
   end
 
   def new
-    @recipe = Recipe.new
+    @user = current_user
+    @recipe = @user.recipes.new
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
-    @recipe.user = current_user
-    if @recipe.save
-      redirect_to recipe_path(@recipe.id), notice: 'New recipe created successfully.'
-    else
-      flash[:alert] = 'Something went wrong, recipe not created'
-      render :new, status: :unprocessable_entity
+    @user = current_user
+    recipe = @user.recipes.new(recipe_params)
+    respond_to do |format|
+      format.html do
+        if recipe.save
+          flash[:success] = 'Recipe created successfully'
+          redirect_to recipes_url
+        else
+          flash.now[:error] = 'Error: Recipe could not be created'
+          render :new
+        end
+      end
     end
-  end
-
-  def update
-    @recipe = Recipe.find(params[:id])
-    if @recipe.public
-      @recipe.update(public: false)
-      flash[:notice] = 'You have updated the recipe status to private'
-    else
-      @recipe.update(public: true)
-      flash[:notice] = 'You have updated the recipe status to public'
-    end
-    redirect_to recipe_path(@recipe)
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
+    @user = current_user
+    @recipe = @user.recipes.find(params[:id])
     @recipe.destroy
-    redirect_to recipes_path, notice: "Successfully deleted the recipe #{@recipe.name}."
-  end
-
-  def my_recipes
-    @recipes = Recipe.where(user_id: current_user.id)
+    redirect_to recipe_path
+    flash[:success] = 'Recipe was deleted!'
   end
 
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
+    params.require(:recipe).permit(:name, :preperation_time, :cooking_time, :public, :description)
   end
 end
