@@ -1,33 +1,40 @@
-class FoodsController < ActionController::Base
+class FoodsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @foods = Food.all
+    if user_signed_in?
+      @foods = Food.where(user_id: current_user.id)
+    else
+      redirect_to user_session_path
+    end
   end
 
   def new
-    @user = current_user
-    food = @user.foods.new(food_params)
-    respond_to do |format|
-      format.html do
-        if food.save
-          flash[:success] = 'Food created successfully'
-          redirect_to foods_path
-        else
-          flash.now[:error] = 'Error: Food could not be created'
-          render :new
-        end
-      end
+    @food = Food.new
+  end
+
+  def create
+    @food = Food.create(food_params)
+    @food.user = current_user
+
+    if @food.save
+      redirect_to foods_url, notice: 'Food was successfully created.'
+    else
+      render :new, alert: 'Food could not be created'
     end
   end
 
   def destroy
-    @user = current_user
-    @food = @user.foods.find(params[:id])
+    @food = Food.find(params[:id])
     @food.destroy
-    redirect_to foods_path
-    flash[:success] = 'Food was deleted!'
+    redirect_to foods_url, notice: 'Food was successfully destroyed.'
   end
 
   private
+
+  def set_food
+    @food = Food.find(params[:id])
+  end
 
   def food_params
     params.require(:food).permit(:name, :measurement_unit, :price)

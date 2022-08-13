@@ -1,11 +1,12 @@
 class RecipesController < ApplicationController
-  before_action do
-    # No current_user for now
-    @user = User.first
+  before_action :authenticate_user!, except: :public_recipes
+
+  def public_recipes
+    @recipes = Recipe.includes(:user).where(public: true)
   end
 
-  def index
-    @recipes = @user.recipes
+  def show
+    @recipe = Recipe.includes(:foods).find(params[:id])
   end
 
   def new
@@ -13,34 +14,41 @@ class RecipesController < ApplicationController
   end
 
   def create
-    recipe = Recipe.new(recipe_params.merge(user: @user))
-    respond_to do |format|
-      format.html do
-        if recipe.save
-          flash[:success] = 'New Recipe created'
-          redirect_to recipes_path
-        else
-          flash.now[:error] = 'Error: Recipe could not be created'
-          render :new
-        end
-      end
+    @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
+    if @recipe.save
+      redirect_to recipe_path(@recipe.id), notice: 'New recipe created successfully.'
+    else
+      flash[:alert] = 'Something went wrong, recipe not created'
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def show
+  def update
     @recipe = Recipe.find(params[:id])
+    if @recipe.public
+      @recipe.update(public: false)
+      flash[:notice] = 'You have updated the recipe status to private'
+    else
+      @recipe.update(public: true)
+      flash[:notice] = 'You have updated the recipe status to public'
+    end
+    redirect_to recipe_path(@recipe)
   end
 
   def destroy
-    recipe = Recipe.find(params[:id])
-    recipe.destroy
-    flash[:success] = 'Recipe successfully deleted'
-    redirect_to recipes_path
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    redirect_to recipes_path, notice: "Successfully deleted the recipe #{@recipe.name}."
+  end
+
+  def my_recipes
+    @recipes = Recipe.where(user_id: current_user.id)
   end
 
   private
 
   def recipe_params
-    params.require('recipe').permit(:name, :description, :cooking_time, :preparation_time)
+    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
   end
 end

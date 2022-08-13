@@ -1,37 +1,38 @@
-<nav class="flex px-8 py-4 justify-between items-center gap-12 border-b-2 border-sky-700 bg-sky-300">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav justify-content-centered">
 
-  <div class="left-side flex gap-3 items-center w-fit">
-    <%=bootstrap_form_with url: root_path, method: :get do %>
-      <button class="text-sky-600">Home</button>
-    <% end %>
-    <% if current_user.present? %>
-      <%=bootstrap_form_with url: recipes_path, method: :get do %>
-        <button class="text-sky-600">Recipes</button>
-      <% end %>
-      <%=bootstrap_form_with url: foods_path, method: :get do %>
-        <button class="text-sky-600">Foods</button>
-      <% end %>
-      <%=bootstrap_form_with url: inventories_path, method: :get do %>
-        <button class="text-sky-600">Inventories</button>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="righ-side flex gap-3 items-center w-fit">
-    <% unless current_user.present? %>
-    <%=bootstrap_form_with model: User.new, url: new_user_session_path, method: :get do %>
-      <button class="text-sky-600">Sign in</button>
-    <% end %>
-    <%=bootstrap_form_with model: User.new, url: new_user_registration_path, method: :get do %>
-      <button class="text-sky-600">Sign up</button>
-    <% end %>
-  <% end %>
-  <% if current_user.present? %>
-    <span class="text-lg text-blue-800">
-      <%= current_user.email %>
-    </span>
-    <%=bootstrap_form_with model: User.new, url: destroy_user_session_path, method: :delete do %> 
-      <button class="text-red-600">Sign out</button>
-    <% end %>
-  <% end %>
+        <li class="nav-item">
+          <%= link_to 'foods', foods_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'recipes', my_recipes_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Public_recipes', public_recipes_path, class: "nav-link" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Edit Profile', edit_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item position-absolute top-0 start-50">
+            <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Sign up', new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign In', user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </nav>
