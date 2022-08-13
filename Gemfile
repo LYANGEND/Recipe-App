@@ -3,6 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+gem 'bootstrap', '~> 5.1', '>= 5.1.3'
+
+gem 'bootstrap_form', '~> 5.1'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
 
@@ -35,9 +39,9 @@ gem 'jbuilder'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
-
+gem 'tzinfo-data'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+# gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
@@ -71,5 +75,5 @@ group :test do
   gem 'webdrivers'
 end
 
-# Application specific gems
-gem 'devise'
+gem 'devise', '~> 4.8', '>= 4.8.1'
+gem 'rubocop', '>= 1.0', '< 2.0'
