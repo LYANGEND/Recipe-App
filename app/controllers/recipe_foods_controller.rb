@@ -1,6 +1,5 @@
 class RecipeFoodsController < ApplicationController
-  def index
-  end
+  def index; end
 
   def new
     @recipe_food = RecipeFood.new
