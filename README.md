@@ -36,6 +36,10 @@ To get a local copy up and running follow these simple example steps.
 - Run ```rails db:create```
 - Run ```rails db:migrate```
 
+***Test***
+
+- Run ```rspec spec```
+
 ### Usage
 
 - Run ```rails s``` to run the app
