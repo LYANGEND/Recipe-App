@@ -58,7 +58,7 @@ To get a local copy up and running follow these simple example steps.
 - Twitter: [@Evans_22J](https://twitter.com/Evans_22J)
 - LinkedIn: [@Evans Sitibekiso](https://www.linkedin.com/in/evans-sitibekiso/)
 
-## 🤝 Contributing
+## 🤝 Contributing on this project
 
 Contributions, issues, and feature requests are welcome!
 
