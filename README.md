@@ -35,6 +35,7 @@ To get a local copy up and running follow these simple example steps.
 - Run ```bundle install```
 - Run ```rails db:create```
 - Run ```rails db:migrate```
+- Run ```rspec spec```
 
 ### Usage
 
