@@ -1,24 +1,73 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Blog With ROR
 
-Things you may want to cover:
+> The **Recipe app** keeps track of all your recipes, ingredients, and inventory. It allows you to save ingredients, keep track of what you have, create recipes, and generate a shopping list based on what you have and what you are missing from a recipe. Also, since sharing recipes is an important part of cooking the app should allow you to make them public so anyone can access them.
 
-* Ruby version
+## Built with
 
-* System dependencies
+- Ruby
+- Rails
+- Postgresql
+- Devise
+- CSS
+- Rspec
+- Capybara
 
-* Configuration
+## Getting Started
 
-* Database creations
+To get a local copy up and running follow these simple example steps.
 
-* Database initialization
+### Prerequisites
 
-* How to run the test suite
+- Ruby
+- Rails
+- Postgresql
 
-* Services (job queues, cache servers, search engines, etc.)
+### Setup
 
-* Deployment instructions
+- Clone the Repository
+`git clone https://github.com/LYANGEND/Recipe-App.git`
 
-* ...
+- Go to the project directory
+`cd recipe-app`
+
+- Run ```bundle install```
+- Run ```rails db:create```
+- Run ```rails db:migrate```
+
+### Usage
+
+- Run ```rails s``` to run the app
+
+## Authors
+
+👤 **David lyangenda**
+
+- GitHub: [@LYANGENDA](https://github.com/LYANGEND)
+- Twitter: [@David_Lyangenda](https://www.linkedin.com/in/david-lyangenda-623087151/)
+- LinkedIn: [@David_Lyangenda](https://www.linkedin.com/in/david-lyangenda-623087151/)
+
+👤 **Evans sitibekiso**
+
+- GitHub: [@evans22j](https://github.com/evans22j)
+- Twitter: [@Evans_22J](https://twitter.com/Evans_22J)
+- LinkedIn: [@Evans Sitibekiso](https://www.linkedin.com/in/evans-sitibekiso/)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Microverse
+
+## 📝 License
+
+This project is [MIT](./LICENSE) licensed.
