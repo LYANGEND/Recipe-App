@@ -21,15 +21,15 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
-        flash[:success] = 'Recipe created successfully'
-        redirect_to recipes_path
+      flash[:success] = 'Recipe created successfully'
+      redirect_to recipes_path
     else
-        flash.now[:danger] = 'Recipe was not created because <ul class="error-list">'
-        @recipe.errors.full_messages.each do |msg|
-          flash.now[:danger] += "<li>#{msg}</li>"
-        end
-        flash.now[:danger] += '</ul>'
-        render :new
+      flash.now[:danger] = 'Recipe was not created because <ul class="error-list">'
+      @recipe.errors.full_messages.each do |msg|
+        flash.now[:danger] += "<li>#{msg}</li>"
+      end
+      flash.now[:danger] += '</ul>'
+      render :new
     end
   end
 
